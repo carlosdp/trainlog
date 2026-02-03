@@ -19,9 +19,19 @@ export default async function RunDetail({ params }: { params: { runId: string } 
      LIMIT 1`,
     [params.runId]
   );
-  const run = runResult.rows[0] as
-    | (typeof runResult.rows[0] & { project_name: string; entity_name: string })
-    | undefined;
+  type RunRow = {
+    id: string;
+    run_id: string;
+    display_name: string | null;
+    state: string;
+    started_at: string;
+    finished_at: string | null;
+    summary_json: Record<string, unknown> | null;
+    config_json: Record<string, unknown> | null;
+    project_name: string;
+    entity_name: string;
+  };
+  const run = runResult.rows[0] as RunRow | undefined;
 
   if (!run) {
     return (

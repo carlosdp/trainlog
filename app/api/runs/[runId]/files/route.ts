@@ -5,8 +5,9 @@ export const dynamic = 'force-dynamic';
 
 export async function GET(
   _req: Request,
-  { params }: { params: { runId: string } }
+  context: { params: Promise<{ runId: string }> }
 ) {
+  const params = await context.params;
   const result = await query(
     `SELECT run_files.*
      FROM run_files

@@ -145,7 +145,7 @@ export async function upsertRunHistory(runPk: string, step: number, ts: Date, da
   await query(
     `INSERT INTO run_history (run_pk, step, ts, data)
      VALUES ($1, $2, $3, $4::jsonb)
-     ON CONFLICT (run_pk, step) DO UPDATE
+     ON CONFLICT (run_pk, step, ts) DO UPDATE
      SET data = run_history.data || EXCLUDED.data,
          ts = EXCLUDED.ts`,
     [runPk, step, ts.toISOString(), JSON.stringify(data)]

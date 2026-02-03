@@ -5,7 +5,8 @@ export const dynamic = 'force-dynamic';
 
 export async function POST(
   req: Request,
-  { params }: { params: { entity: string; project: string; run: string } }
+  context: { params: Promise<{ entity: string; project: string; run: string }> }
 ) {
+  const params = await context.params;
   return handleFileStream(req, params);
 }

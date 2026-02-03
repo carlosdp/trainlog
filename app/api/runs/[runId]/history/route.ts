@@ -11,8 +11,9 @@ function downsample<T>(rows: T[], max = 2000) {
 
 export async function GET(
   req: Request,
-  { params }: { params: { runId: string } }
+  context: { params: Promise<{ runId: string }> }
 ) {
+  const params = await context.params;
   const { searchParams } = new URL(req.url);
   const keys = (searchParams.get('keys') ?? '').split(',').filter(Boolean);
   const minStep = searchParams.get('minStep');

@@ -59,8 +59,11 @@ CREATE TABLE IF NOT EXISTS run_history (
   step integer NOT NULL,
   ts timestamptz NOT NULL,
   data jsonb NOT NULL,
-  PRIMARY KEY (run_pk, step)
+  PRIMARY KEY (run_pk, step, ts)
 );
+
+ALTER TABLE run_history DROP CONSTRAINT IF EXISTS run_history_pkey;
+ALTER TABLE run_history ADD PRIMARY KEY (run_pk, step, ts);
 
 DO $$
 BEGIN

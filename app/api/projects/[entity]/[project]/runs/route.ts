@@ -5,8 +5,9 @@ export const dynamic = 'force-dynamic';
 
 export async function GET(
   req: Request,
-  { params }: { params: { entity: string; project: string } }
+  context: { params: Promise<{ entity: string; project: string }> }
 ) {
+  const params = await context.params;
   const { searchParams } = new URL(req.url);
   const limit = Number(searchParams.get('limit') ?? 50);
 
