@@ -1,0 +1,19 @@
+[Unit]
+Description=Trainlog (W&B-compatible tracker)
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/mnt/volume_sfo3_01/trainlog
+EnvironmentFile=/etc/trainlog.env
+Environment=PATH=/usr/local/bin:/usr/bin:/bin
+Environment=NODE_ENV=production
+Environment=PORT=3000
+ExecStartPre=/usr/bin/env bun run migrate
+ExecStartPre=/usr/bin/env bun run build
+ExecStart=/usr/bin/env bun run start
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

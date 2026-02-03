@@ -1,0 +1,29 @@
+{
+  "name": "trainlog",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "bun@1.1.0",
+  "scripts": {
+    "dev": "next dev -p 3000",
+    "build": "next build",
+    "start": "next start -p 3000",
+    "lint": "next lint",
+    "migrate": "bun run scripts/migrate.ts"
+  },
+  "dependencies": {
+    "next": "latest",
+    "pg": "^8.11.5",
+    "pg-types": "^4.0.2",
+    "react": "latest",
+    "react-dom": "latest",
+    "recharts": "^2.12.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.30",
+    "@types/react": "^18.2.73",
+    "@types/react-dom": "^18.2.22",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "latest",
+    "typescript": "^5.4.5"
+  }
+}
