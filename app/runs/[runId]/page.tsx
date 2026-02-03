@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { query } from '@/lib/db';
 import { StateBadge } from '@/components/StateBadge';
 import { HistoryChart } from '@/components/HistoryChart';
+import { basePath } from '@/lib/basePath';
 
 export const dynamic = 'force-dynamic';
 
@@ -142,7 +143,11 @@ export default async function RunDetail({ params }: { params: { runId: string } 
               {files.map((file) => (
                 <tr key={file.name}>
                   <td>
-                    <a href={`/storage?run=${encodeURIComponent(run.run_id)}&file=${encodeURIComponent(file.name)}`}>
+                    <a
+                      href={`${basePath}/storage?run=${encodeURIComponent(run.run_id)}&file=${encodeURIComponent(
+                        file.name
+                      )}`}
+                    >
                       {file.name}
                     </a>
                   </td>

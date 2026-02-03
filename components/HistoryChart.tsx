@@ -10,6 +10,7 @@ import {
   XAxis,
   YAxis
 } from 'recharts';
+import { basePath } from '@/lib/basePath';
 
 export function HistoryChart({ runId, metricKeys }: { runId: string; metricKeys: string[] }) {
   const [activeKey, setActiveKey] = useState(metricKeys[0] ?? '');
@@ -18,7 +19,7 @@ export function HistoryChart({ runId, metricKeys }: { runId: string; metricKeys:
   useEffect(() => {
     if (!activeKey) return;
     const controller = new AbortController();
-    fetch(`/api/runs/${runId}/history?keys=${encodeURIComponent(activeKey)}`, {
+    fetch(`${basePath}/api/runs/${runId}/history?keys=${encodeURIComponent(activeKey)}`, {
       signal: controller.signal
     })
       .then((res) => res.json())
